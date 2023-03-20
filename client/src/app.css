@@ -1,87 +1,110 @@
-@import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;900&display=swap");
 
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Golos Text', sans-serif;
-
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Golos Text", sans-serif;
 }
 
-:root{
-    --PrimaryColor: hsl(199, 100%, 33%);
-    --SecondaryColor: hsl(187, 85%, 43%);
-    --gradientColor: linear-gradient(to right, hsl(187, 85%, 43%), hsl(199,100%,33%));
-    --whiteColor: hsl(0, 0%,100%);
-    --blackColor: hsl(201, 33%, 16%);
-    --textColor: hsl(240, 4%, 36%);
-    --whiteColor: hsl(0, 0%, 93%);
-    --greyText: rgb(190, 190, 190);
-    --inputColor: rgb(239, 239, 239);
-    --bodyColor: rgb(240,240,246);
-    --cardBG: rgb(225, 225, 235);
+:root {
+  --PrimaryColor: hsl(199, 100%, 33%);
+  --SecondaryColor: hsl(187, 85%, 43%);
+  --gradientColor: linear-gradient(
+    to right,
+    hsl(187, 85%, 43%),
+    hsl(199, 100%, 33%)
+  );
+  --whiteColor: hsl(0, 0%, 100%);
+  --blackColor: hsl(201, 33%, 16%);
+  --textColor: hsl(240, 4%, 36%);
+  --whiteColor: hsl(0, 0%, 93%);
+  --greyText: rgb(190, 190, 190);
+  --inputColor: rgb(239, 239, 239);
+  --bodyColor: rgb(240, 240, 246);
+  --cardBG: rgb(225, 225, 235);
 }
 
-a{
-    text-decoration: none;
+html {
+  scroll-behavior: smooth;
 }
 
-li{
-    list-style: none;
+a {
+  text-decoration: none;
 }
 
-.section{
-    padding: 4rem 0 2rem;
+li {
+  list-style: none;
 }
 
-.container{
-    padding: 0rem 1.5rem;
+.section {
+  padding: 4rem 0 2rem;
 }
 
-
-
-.icon{
-    font-size: 2rem;
-    cursor: pointer;
-}
-  
-.flex{
-    display: flex;
-    align-items: center;
+.container {
+  padding: 0rem 1.5rem;
 }
 
-.grid{
-    display: grid;
-    align-items: center;
+.icon {
+  font-size: 2rem;
+  cursor: pointer;
 }
 
-.btn{
-    padding: .6rem 1.5rem;
-    background: var(--gradientColor);
-    border-radius: 3rem;
-    border: none;
-    outline: none;
-    cursor: pointer;
+.flex {
+  display: flex;
+  align-items: center;
 }
 
-.btn a{
-    color: var(--whiteColorDream);
-    font-weight: 500;
+.grid {
+  display: grid;
+  align-items: center;
 }
 
-.btn:hover{
-    background: var(--SecondaryColor);
+.btn {
+  padding: 0.6rem 1.5rem;
+  background: var(--gradientColor);
+  border-radius: 3rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
 
-img, video{
-    width: 100%;
-    height: auto;
+.btn a {
+  color: var(--whiteColorDream);
+  font-weight: 500;
 }
 
-input{
-    font-size: 100%;
+.btn:hover {
+  background: var(--SecondaryColor);
 }
 
-body{
-    background: var(--bodyColor);
+img,
+video {
+  width: 100%;
+  height: auto;
+}
+
+input {
+  font-size: 100%;
+}
+
+body {
+  background: var(--bodyColor);
+}
+
+@media screen and (min-width: 1240px) {
+  .container {
+    width: 80% !important;
+    margin: auto !important;
+  }
+
+  .section {
+    padding: 6rem 0 4rem;
+  }
+}
+
+@media screen and (min-width: 2560px) {
+  body {
+    zoom: 1.7;
+  }
 }

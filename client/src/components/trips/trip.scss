@@ -126,19 +126,46 @@
           font-weight: 500;
         }
 
-        .btn{
+        .btn {
           margin-top: 1rem;
           color: var(--whiteColor);
           font-weight: 600;
           justify-content: space-between;
           gap: 0.5em;
 
-          .icon{
+          .icon {
             align-self: center;
             font-size: 18px;
           }
         }
       }
+    }
+  }
+}
+
+@media screen and (min-width: 500px) {
+  .title {
+    font-size: 1.5rem;
+    &::after {
+      width: 155px !important;
+    }
+  }
+
+  .secContent {
+    grid-template-columns: repeat(2, 1fr);
+
+    .singleDestination {
+      height: auto;
+    }
+  }
+}
+
+@media screen and (min-width: 840px) {
+  .secContent {
+    grid-template-columns: repeat(3, 1fr);
+
+    .singleDestination {
+      height: auto;
     }
   }
 }

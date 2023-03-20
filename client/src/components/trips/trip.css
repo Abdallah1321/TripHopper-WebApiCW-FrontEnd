@@ -122,4 +122,27 @@
 .main .secContent .singleDestination .cardData .btn .icon {
   align-self: center;
   font-size: 18px;
+}
+
+@media screen and (min-width: 500px) {
+  .title {
+    font-size: 1.5rem;
+  }
+  .title::after {
+    width: 155px !important;
+  }
+  .secContent {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .secContent .singleDestination {
+    height: auto;
+  }
+}
+@media screen and (min-width: 840px) {
+  .secContent {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .secContent .singleDestination {
+    height: auto;
+  }
 }/*# sourceMappingURL=trip.css.map */

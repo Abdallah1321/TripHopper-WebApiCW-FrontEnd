@@ -97,4 +97,45 @@
 }
 .header .toggleNavbar:hover.icon {
   color: var(--SecondaryColor);
+}
+
+@media screen and (min-width: 769px) {
+  .toggleNavbar, .closeNavbar {
+    display: none;
+  }
+  .header {
+    padding: 1.5rem 2rem;
+  }
+  .header .navbar .navLists {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+  }
+  .header .navbar .navLists .navItem .navLink {
+    color: var(--textColor);
+    padding: 0 0.45rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .header .navbar .navLists .navItem .navLink:hover {
+    color: var(--PrimaryColor);
+  }
+  .header .navbar .navLists .btn {
+    margin-left: 1rem;
+  }
+  .header .navbar .navLists .btn a {
+    color: var(--whiteColor);
+    font-weight: 500;
+  }
+}
+@media screen and (min-width: 960px) {
+  .header .navbar .navLists .navItem {
+    padding: 0 0.7rem;
+  }
+}
+@media screen and (min-width: 1240px) {
+  .header {
+    padding: 1rem 8.5rem;
+  }
 }/*# sourceMappingURL=navbar.css.map */
