@@ -1,0 +1,46 @@
+.authPage {
+  display: grid;
+  grid-template-columns: 70% 30% 0%;
+  width: 60%;
+  height: 400px;
+  background-color: #f5f5f5;
+  padding: 0px;
+  margin-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid #000;
+  overflow: hidden;
+  transition: 0.3s linear;
+
+  &.active {
+    grid-template-columns: 0% 30% 70%;
+    transition: 0.3s linear;
+  }
+
+  .sideDiv {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background: url("https://media.istockphoto.com/id/1285301614/photo/young-man-arms-outstretched-by-the-sea-at-sunrise-enjoying-freedom-and-life-people-travel.jpg?s=612x612&w=0&k=20&c=0QW6GnkuFNYcPZhy26XVHuTc2avJTK8u6l_1iT0SlZk=");
+    background-size: cover;
+    background-position: center;
+    justify-content: center;
+
+    button {
+      padding: 10px 20px;
+      background-color: #000;
+      color: #fff;
+      border: 1px solid #000;
+      border-radius: 1px;
+      cursor: pointer;
+      font-size: 0.99rem;
+      transition: 0.2s linear;
+
+      &:hover {
+        background-color: rgb(55, 54, 54);
+        border: 1px solid rgb(55, 54, 54);
+      }
+    }
+  }
+}

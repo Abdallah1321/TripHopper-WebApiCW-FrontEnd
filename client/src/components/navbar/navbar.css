@@ -71,6 +71,10 @@
   .header .navbar .navLists .navItem .navLink:hover {
     color: var(--PrimaryColor);
   }
+  .header .navbar .navLists .navWelcome {
+    display: flex;
+    color: var(--SecondaryColor);
+  }
   .header .navbar .navLists .btn {
     margin-top: 1rem;
   }
@@ -120,6 +124,11 @@
   }
   .header .navbar .navLists .navItem .navLink:hover {
     color: var(--PrimaryColor);
+  }
+  .header .navbar .navLists .navWelcome {
+    padding-left: 4rem;
+    display: flex;
+    color: var(--SecondaryColor);
   }
   .header .navbar .navLists .btn {
     margin-left: 1rem;

@@ -15,7 +15,6 @@ const Navbar = () => {
     setActive("navbar");
   };
 
-
   return (
     <section className="navBarSec">
       <header className="header flex">
@@ -63,8 +62,14 @@ const Navbar = () => {
                 Contact
               </a>
             </li>
+            <li className="navWelcome">
+              Welcome, <span>Guest</span>
+            </li>
             <button className="btn">
-              <a href="#">BOOK NOW</a>
+              <a href="/auth">LOGIN</a>
+            </button>
+            <button className="btn">
+              <a href="/auth">SIGN UP</a>
             </button>
           </ul>
 

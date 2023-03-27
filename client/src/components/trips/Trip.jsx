@@ -3,6 +3,7 @@ import "./trip.css";
 
 import { GrLocation } from "react-icons/gr";
 import { AiOutlineArrowRight } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 import img1 from "../../assets/images/bali.jpg";
 import img2 from "../../assets/images/aswan.jpg";
@@ -84,10 +85,18 @@ const Trip = () => {
     Aos.init({ duration: 2000 });
   }, []);
 
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    navigate("/trips/1");
+  };
+
   return (
     <section className="main container section">
       <div className="secTitle">
-        <h3 data-aos="fade-right" className="title">Our Most Visited</h3>
+        <h3 data-aos="fade-right" className="title">
+          Our Most Visited
+        </h3>
       </div>
 
       <div className="secContent grid">
@@ -145,7 +154,7 @@ const Trip = () => {
                     </p>
                   </div>
 
-                  <button className="btn flex">
+                  <button onClick={handleSearch} className="btn flex">
                     LEARN MORE <AiOutlineArrowRight className="icon" />
                   </button>
                 </div>

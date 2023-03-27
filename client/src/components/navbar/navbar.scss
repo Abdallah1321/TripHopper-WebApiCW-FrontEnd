@@ -74,6 +74,11 @@
             }
           }
         }
+        .navWelcome{
+          display: flex;
+          color: var(--SecondaryColor);
+        }
+
 
         .btn {
           margin-top: 1rem;
@@ -140,6 +145,12 @@
               color: var(--PrimaryColor);
             }
           }
+        }
+
+        .navWelcome{
+          padding-left: 4rem;
+          display: flex;
+          color: var(--SecondaryColor);
         }
 
         .btn{

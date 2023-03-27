@@ -1,19 +1,21 @@
-import React from 'react'
-import './app.css'
-import Navbar from './components/navbar/Navbar'
-import Home from './components/home/Home'
-import Trip from './components/trips/Trip'
-import Footer from './components/footer/Footer'
+import React from "react";
+import "./app.css";
+
+import Home from "./pages/home/Home";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Auth from "./pages/auth/Auth";
+import Details from "./pages/details/Details";
 
 const App = () => {
   return (
-    <>
-    <Navbar/>
-    <Home/>
-    <Trip/>
-    <Footer/>
-    </>
-  )
-}
+    <BrowserRouter>
+      <Routes>
+        <Route path="/trips" element={<Home />} />
+        <Route path="/auth" element={<Auth/>} />
+        <Route path="/trips/:id" element={<Details />} />
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
-export default App
+export default App;
