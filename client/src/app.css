@@ -12,8 +12,8 @@
   --SecondaryColor: hsl(187, 85%, 43%);
   --gradientColor: linear-gradient(
     to right,
-    hsl(187, 85%, 43%),
-    hsl(199, 100%, 33%)
+    hsl(214, 85%, 43%),
+    hsl(199, 98%, 22%)
   );
   --whiteColor: hsl(0, 0%, 100%);
   --blackColor: hsl(201, 33%, 16%);
@@ -24,6 +24,7 @@
   --bodyColor: rgb(240, 240, 246);
   --cardBG: rgb(225, 225, 235);
 }
+
 
 html {
   scroll-behavior: smooth;

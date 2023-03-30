@@ -3,8 +3,8 @@
   --SecondaryColor: hsl(187, 85%, 43%);
   --gradientColor: linear-gradient(
     to right,
-    hsl(187, 85%, 43%),
-    hsl(199, 100%, 33%)
+    hsl(214, 85%, 43%),
+    hsl(199, 98%, 22%)
   );
   --whiteColor: hsl(0, 0%, 100%);
   --blackColor: hsl(201, 33%, 16%);
@@ -28,7 +28,6 @@
     position: absolute;
     height: 100%;
     width: 100%;
-    background: rgb(92, 126, 138);
     top: 0;
     bottom: 0;
     z-index: 1;
@@ -38,7 +37,7 @@
   video {
     position: absolute;
     height: 100%;
-    width: 100%;
+    width: 200%;
     top: 0;
     bottom: 0;
     object-fit: cover;
@@ -46,19 +45,21 @@
 
   .content {
     width: 100%;
-    height: max-content;
-    padding: 8rem 1.5rem;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    text-align: center;
     display: flex;
-    row-gap: 3rem;
+    text-align: center;
     flex-direction: column;
-    align-items: stretch;
+    align-items: center;
     justify-content: center;
-    margin: auto;
+    gap: 1rem;
     color: var(--whiteColor);
-    z-index: 100;
+    z-index: 3;
 
     .textDiv {
-      padding: 2rem 0;
+      padding: 5rem 5rem;
 
       .smallText {
         font-size: 13px;
@@ -72,17 +73,21 @@
     }
 
     .cardDiv {
+      display: flex;
       position: relative;
-      padding: 2rem 1rem;
+      padding: 0.5rem;
       background: var(--whiteColor);
-      border-radius: 10px;
+      border-radius: 0.5rem;
       gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      padding: 0 1.5rem;
 
       label {
         display: block;
         color: var(--textColor);
         padding-bottom: 10px;
-        font-size: 13px;
+        font-size: 1.1rem;
         font-weight: 500;
       }
 
@@ -120,24 +125,16 @@
           color: var(--PrimaryColor) !important;
           margin-left: 10px;
         }
-
-        .input[type="range"] {
-          background: blue;
-        }
       }
 
       .searchFilters {
-        position: absolute;
-        background: var(--gradientColor);
-        width: max-content;
-        bottom: -0.7rem;
-        column-gap: 0.8rem;
-        padding: 5px 1rem;
-        border-radius: 3rem;
-        left: 50%;
-        transform: translate(-50%);
-        justify-content: center;
+        padding: 1rem;
         cursor: pointer;
+        border-radius: 0.3rem;
+        border: none;
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        background: var(--gradientColor);
 
         &:hover {
           background: var(--PrimaryColor);
@@ -221,30 +218,29 @@
 }
 
 @media screen and (min-width: 1240px) {
-    .home {
-      height: 90vh;
+  .home {
+    height: 90vh;
 
-      .content{
-        padding-left: 0;
-        padding-right: 0;
+    .content {
+      padding-left: 0;
+      padding-right: 0;
 
-        .cardDiv{
-            padding: 2rem 1rem;
-            grid-template-columns: repeat(3, 1fr);
-            .input{
-                margin-bottom: 1rem;
-            }
+      .cardDiv {
+        padding: 2rem 1rem;
+        grid-template-columns: repeat(3, 1fr);
+        .input {
+          margin-bottom: 1rem;
+        }
 
-            .searchOptions{
-                bottom: -1rem;
-                padding: 8px 1rem;
+        .searchOptions {
+          bottom: -1rem;
+          padding: 8px 1rem;
 
-                span{
-                    font-size: 17px;
-                }
-            }
+          span {
+            font-size: 17px;
+          }
         }
       }
     }
   }
-  
+}

@@ -85,14 +85,14 @@ const Home = () => {
 
           <div className="inputPrice">
             <div className="label_total flex">
-              <label htmlFor="price">What is your budget?</label>
-              <h3 className="total">EGP 100,000</h3>
+              <label htmlFor="price">What is your budget? (EGP)</label>
+              <h3 className="total"></h3>
             </div>
             <div className="input flex">
-              <input type="range" max="100000" min="1000" />
+              <input type="number" max="100000" min="1000" />
             </div>
           </div>
-
+      
           <div className="searchFilters flex">
             <AiOutlineSearch className="icon" />
             <span>Find Your Trip!</span>

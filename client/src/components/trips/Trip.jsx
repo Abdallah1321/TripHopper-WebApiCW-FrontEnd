@@ -144,14 +144,6 @@ const Trip = () => {
                   <div className="desc">
                     <h4>Details</h4>
                     <p>{description}</p>
-                    <h4>Famous Food for Country</h4>
-                    <p>{food}</p>
-                    <h4>Weather Conditions</h4>
-                    <p>{weather} C</p>
-                    <h4>Currency Exchange</h4>
-                    <p>
-                      1 {exCode} = {exRate} EGP
-                    </p>
                   </div>
 
                   <button onClick={handleSearch} className="btn flex">

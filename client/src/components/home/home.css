@@ -3,8 +3,8 @@
   --SecondaryColor: hsl(187, 85%, 43%);
   --gradientColor: linear-gradient(
     to right,
-    hsl(187, 85%, 43%),
-    hsl(199, 100%, 33%)
+    hsl(214, 85%, 43%),
+    hsl(199, 98%, 22%)
   );
   --whiteColor: hsl(0, 0%, 100%);
   --blackColor: hsl(201, 33%, 16%);
@@ -28,7 +28,6 @@
   position: absolute;
   height: 100%;
   width: 100%;
-  background: rgb(92, 126, 138);
   top: 0;
   bottom: 0;
   z-index: 1;
@@ -37,7 +36,7 @@
 .home video {
   position: absolute;
   height: 100%;
-  width: 100%;
+  width: 200%;
   top: 0;
   bottom: 0;
   -o-object-fit: cover;
@@ -45,20 +44,21 @@
 }
 .home .content {
   width: 100%;
-  height: -moz-max-content;
-  height: max-content;
-  padding: 8rem 1.5rem;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  text-align: center;
   display: flex;
-  row-gap: 3rem;
+  text-align: center;
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;
   justify-content: center;
-  margin: auto;
+  gap: 1rem;
   color: var(--whiteColor);
-  z-index: 100;
+  z-index: 3;
 }
 .home .content .textDiv {
-  padding: 2rem 0;
+  padding: 5rem 5rem;
 }
 .home .content .textDiv .smallText {
   font-size: 13px;
@@ -69,17 +69,21 @@
   font-size: 1.8rem;
 }
 .home .content .cardDiv {
+  display: flex;
   position: relative;
-  padding: 2rem 1rem;
+  padding: 0.5rem;
   background: var(--whiteColor);
-  border-radius: 10px;
+  border-radius: 0.5rem;
   gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.5rem;
 }
 .home .content .cardDiv label {
   display: block;
   color: var(--textColor);
   padding-bottom: 10px;
-  font-size: 13px;
+  font-size: 1.1rem;
   font-weight: 500;
 }
 .home .content .cardDiv .label_total {
@@ -116,23 +120,14 @@
   color: var(--PrimaryColor) !important;
   margin-left: 10px;
 }
-.home .content .cardDiv .input .input[type=range] {
-  background: blue;
-}
 .home .content .cardDiv .searchFilters {
-  position: absolute;
-  background: var(--gradientColor);
-  width: -moz-max-content;
-  width: max-content;
-  bottom: -0.7rem;
-  -moz-column-gap: 0.8rem;
-       column-gap: 0.8rem;
-  padding: 5px 1rem;
-  border-radius: 3rem;
-  left: 50%;
-  transform: translate(-50%);
-  justify-content: center;
+  padding: 1rem;
   cursor: pointer;
+  border-radius: 0.3rem;
+  border: none;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  background: var(--gradientColor);
 }
 .home .content .cardDiv .searchFilters:hover {
   background: var(--PrimaryColor);

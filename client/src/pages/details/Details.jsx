@@ -23,9 +23,7 @@ const Data = [
 ];
 
 const Details = () => {
-  function handleSave() {
-    setItinerary((prevItinerary) => [...prevItinerary, trip]);
-  }
+
   return (
     <div>
       <Navbar />
@@ -88,7 +86,7 @@ const Details = () => {
                       </p>
                     </div>
 
-                    <button onClick={handleSave} className="btn flex">
+                    <button className="btn flex">
                       SAVE TRIP?
                       <BsFillBookmarkFill className="icon" />
                     </button>
