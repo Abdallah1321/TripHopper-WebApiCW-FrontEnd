@@ -8,7 +8,7 @@ const Signup = () => {
       <input type={'email'} placeholder={'Email'}/>
       <input type={'password'} placeholder={'Password'}/>
       <input type={'password'} placeholder={'Confirm Password'}/>
-      <button type={'submit'}>Signup</button>
+      <button type={'submit'} className='btn'>Signup</button>
     </form>
   </div>
   )

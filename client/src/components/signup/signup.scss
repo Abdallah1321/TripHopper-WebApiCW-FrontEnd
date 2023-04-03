@@ -1,8 +1,26 @@
+:root {
+  --PrimaryColor: hsl(199, 100%, 33%);
+  --SecondaryColor: hsl(187, 85%, 43%);
+  --gradientColor: linear-gradient(
+    to right,
+    hsl(214, 42%, 50%),
+    hsl(199, 83%, 28%)
+  );
+  --whiteColor: hsl(0, 0%, 100%);
+  --blackColor: hsl(201, 33%, 16%);
+  --textColor: hsl(240, 4%, 36%);
+  --whiteColorDream: hsl(0, 0%, 93%);
+  --greyText: rgb(190, 190, 190);
+  --inputColor: rgb(239, 239, 239);
+  --bodyColor: rgb(240, 240, 246);
+  --cardBG: rgb(225, 225, 235);
+}
+
 .signup {
     height: 100%;
     width: 100%;
     overflow: hidden;
-    background: #fff;
+    background: #96c6be;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -45,13 +63,13 @@
         border-radius: 5px;
         margin-top: 10px;
         font-size: 0.99rem;
-        color: #000;
-        background: #fff;
+        color: var(--whiteColor);
+        background: var(--gradientColor);
         cursor: pointer;
         transition: 0.3s linear;
   
         &:hover{
-          background: #000;
+          background: var(--SecondaryColor);
           color: #fff;
         }
       }

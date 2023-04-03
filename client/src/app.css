@@ -12,8 +12,8 @@
   --SecondaryColor: hsl(187, 85%, 43%);
   --gradientColor: linear-gradient(
     to right,
-    hsl(214, 85%, 43%),
-    hsl(199, 98%, 22%)
+    hsl(214, 42%, 50%),
+    hsl(199, 83%, 28%)
   );
   --whiteColor: hsl(0, 0%, 100%);
   --blackColor: hsl(201, 33%, 16%);
@@ -22,7 +22,7 @@
   --greyText: rgb(190, 190, 190);
   --inputColor: rgb(239, 239, 239);
   --bodyColor: rgb(240, 240, 246);
-  --cardBG: rgb(225, 225, 235);
+  --cardBG: rgb(179, 179, 189);
 }
 
 

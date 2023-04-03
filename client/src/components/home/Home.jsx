@@ -89,7 +89,7 @@ const Home = () => {
               <h3 className="total"></h3>
             </div>
             <div className="input flex">
-              <input type="number" max="100000" min="1000" />
+              <input type="number" max="100000" min="1000" placeholder="1000"/>
             </div>
           </div>
       

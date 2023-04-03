@@ -98,7 +98,7 @@
 .home .content .cardDiv .input {
   height: 40px;
   padding: 0 1rem;
-  background: var(--inputColor);
+  background: white;
   border-radius: 3rem;
 }
 .home .content .cardDiv .input input {
