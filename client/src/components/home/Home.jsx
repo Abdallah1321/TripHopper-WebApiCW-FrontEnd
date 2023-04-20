@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import "./home.css";
 import video from "../../assets/videos/plane.mp4";
+import img from "../../assets/images/header.avif";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { FaFilter } from "react-icons/fa";
 import { BsFacebook, BsInstagram, BsTwitter } from "react-icons/bs";
@@ -11,6 +12,8 @@ import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import { BASE_URL } from "../../utils/config";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   useEffect(() => {
@@ -30,11 +33,31 @@ const Home = () => {
     setFocusedInput(focusedInput);
   };
 
+  const locationRef = useRef("");
+  const budgetRef = useRef(0);
+
+  const navigate = useNavigate();
+
+  const handleSearch = async () => {
+    const location = locationRef.current.value;
+    const budget = budgetRef.current.value;
+    const res = await fetch(
+      `${BASE_URL}/trips/search/getTripBySearch?location=${location}&budget=${budget}`
+    );
+
+    if (!res.ok) alert("Something went wrong");
+
+    const result = await res.json();
+
+    navigate(`/trips/search?location=${location}&budget=${budget}`, {
+      state: result.data,
+    });
+  };
+
   return (
     <section className="home">
       <div className="overlay"></div>
-      <video src={video} muted autoPlay loop type="video/mp4"></video>
-
+      <img src={img} alt="" />
       <div className="content container">
         <div className="textDiv">
           <span data-aos="fade-up" className="smallTxt">
@@ -49,7 +72,7 @@ const Home = () => {
           <div className="inputDest">
             <label htmlFor="city">Where do you want to go?</label>
             <div className="input flex">
-              <input type="text" placeholder="Enter destination..." />
+              <input type="text" placeholder="Enter destination..." ref={locationRef}/>
               <MdOutlineLocationOn className="icon" />
             </div>
           </div>
@@ -89,13 +112,13 @@ const Home = () => {
               <h3 className="total"></h3>
             </div>
             <div className="input flex">
-              <input type="number" max="100000" min="1000" placeholder="1000"/>
+              <input type="number" max="100000" min="1000" placeholder="1000" ref={budgetRef} />
             </div>
           </div>
-      
+
           <div className="searchFilters flex">
             <AiOutlineSearch className="icon" />
-            <span>Find Your Trip!</span>
+            <span onClick={handleSearch}>Find Your Trip!</span>
           </div>
         </div>
 

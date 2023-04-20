@@ -26,6 +26,7 @@
 }
 .home .overlay {
   position: absolute;
+  background: rgb(78, 77, 77);
   height: 100%;
   width: 100%;
   top: 0;
@@ -33,7 +34,7 @@
   z-index: 1;
   mix-blend-mode: hard-light;
 }
-.home video {
+.home img {
   position: absolute;
   height: 100%;
   width: 200%;
@@ -72,7 +73,7 @@
   display: flex;
   position: relative;
   padding: 0.5rem;
-  background: var(--whiteColor);
+  background: rgb(211, 207, 207);
   border-radius: 0.5rem;
   gap: 1rem;
   align-items: center;

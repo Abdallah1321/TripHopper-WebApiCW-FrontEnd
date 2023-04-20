@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
-import "./trip.css";
+import React, { useEffect, useState } from "react";
+import "./searchResult.css";
 
 import { GrLocation } from "react-icons/gr";
 import { AiOutlineArrowRight } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+import { useNavigate , useLocation} from "react-router-dom";
 
 import useFetch from "../../hooks/useFetch";
 import { BASE_URL } from "../../utils/config";
@@ -13,7 +13,11 @@ import "aos/dist/aos.css";
 
 
 const Trip = () => {
-  const { data, loading, error } = useFetch(`${BASE_URL}/trips`);
+  const location = useLocation();
+
+  const [data] = useState(location.state)
+
+  console.log(data)
 
   useEffect(() => {
     Aos.init({ duration: 2000 });
@@ -21,7 +25,7 @@ const Trip = () => {
 
   const navigate = useNavigate();
 
-  const handleClick = () => {
+  const handleSearch = () => {
     navigate("/trips/1");
   };
 
@@ -29,17 +33,14 @@ const Trip = () => {
     <section className="main container section">
       <div className="secTitle">
         <h3 data-aos="fade-right" className="title">
-          Our Most Visited
+          This What You're Looking For?
         </h3>
       </div>
 
-      {loading && <h4>Loading...</h4>}
-      {error && <h4>{error}</h4>}
-
-      <div className="secContent grid">
-        {!loading &&
-          !error &&
-          data.map(
+      
+        <div className="secContent grid">
+        { data.length === 0 ? <h4>No Trips Found</h4> :
+          data?.map(
             ({
               _id,
               destName,
@@ -74,7 +75,7 @@ const Trip = () => {
                       <p>{description}</p>
                     </div>
 
-                    <button onClick={handleClick} className="btn flex">
+                    <button onClick={handleSearch} className="btn flex">
                       LEARN MORE <AiOutlineArrowRight className="icon" />
                     </button>
                   </div>
