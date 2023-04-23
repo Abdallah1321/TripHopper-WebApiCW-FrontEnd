@@ -124,6 +124,31 @@
   align-self: center;
   font-size: 18px;
 }
+.main .pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3rem;
+  gap: 3rem;
+}
+.main .pagination span {
+  width: 2rem;
+  height: 2rem;
+  padding: 5px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--SecondaryColor);
+  color: var(--textColor);
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: 700;
+}
+.main .pagination .active_page {
+  background: var(--SecondaryColor);
+  color: #fff !important;
+}
 
 @media screen and (min-width: 500px) {
   .title {

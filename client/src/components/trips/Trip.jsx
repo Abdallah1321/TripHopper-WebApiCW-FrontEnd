@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./trip.css";
 
 import { GrLocation } from "react-icons/gr";
 import { AiOutlineArrowRight } from "react-icons/ai";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import useFetch from "../../hooks/useFetch";
 import { BASE_URL } from "../../utils/config";
@@ -11,13 +11,19 @@ import { BASE_URL } from "../../utils/config";
 import Aos from "aos";
 import "aos/dist/aos.css";
 
-
 const Trip = () => {
-  const { data, loading, error } = useFetch(`${BASE_URL}/trips`);
+  const [pageCount, setPageCount] = useState(0);
+  const [page, setPage] = useState(0);
+
+  const { data, loading, error } = useFetch(`${BASE_URL}/trips?page=${page}`);
+  const { data: tripCount } = useFetch(`${BASE_URL}/trips/search/getTripCount`);
 
   useEffect(() => {
     Aos.init({ duration: 2000 });
-  }, []);
+    const pages = Math.ceil(tripCount / 9);
+    setPageCount(pages);
+    window.scrollTo(0, 700);
+  }, [page, tripCount]);
 
   const navigate = useNavigate();
 
@@ -44,11 +50,9 @@ const Trip = () => {
               _id,
               destName,
               location,
-              nationality,
               imgSrc,
               description,
               budget,
-              exCode,
             }) => {
               return (
                 <div data-aos="fade-up" key={_id} className="singleDestination">
@@ -74,14 +78,27 @@ const Trip = () => {
                       <p>{description}</p>
                     </div>
 
-                    <button onClick={handleClick} className="btn flex">
-                      LEARN MORE <AiOutlineArrowRight className="icon" />
-                    </button>
+                    <Link to={`/trips/${_id}`}>
+                      <button className="btn flex">
+                        LEARN MORE <AiOutlineArrowRight className="icon" />
+                      </button>
+                    </Link>
                   </div>
                 </div>
               );
             }
           )}
+      </div>
+      <div className="pagination">
+        {[...Array(pageCount).keys()].map((number) => (
+          <span
+            key={number}
+            onClick={() => setPage(number)}
+            className={page === number ? "active_page" : ""}
+          >
+            {number + 1}
+          </span>
+        ))}
       </div>
     </section>
   );

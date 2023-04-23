@@ -17,7 +17,7 @@ const Auth = () => {
   };
 
   return (
-    
+    <div className="">
     <div>
       <div className="authPage" ref={authRef}>
         <Login />
@@ -29,6 +29,7 @@ const Auth = () => {
         </div>
         <Signup />
       </div>
+    </div>
     </div>
   );
 };

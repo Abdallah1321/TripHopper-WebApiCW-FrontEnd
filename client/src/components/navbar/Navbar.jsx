@@ -4,6 +4,9 @@ import logo from "../../assets/images/logo.png";
 import { useState } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { Link } from "react-router-dom";
+import { useLogout } from "../../hooks/useLogout";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const Navbar = () => {
   const [active, setActive] = useState("navbar");
@@ -15,14 +18,23 @@ const Navbar = () => {
     setActive("navbar");
   };
 
+  const { user } = useAuthContext();
+
+  const { logout } = useLogout();
+  const handleClick = () => {
+    logout();
+  };
+
   return (
     <section className="navBarSec">
       <header className="header flex">
         <div className="logoDiv">
-          <a href="#" className="logo flex">
-            <img src={logo} className="resize" alt="" />
-            <h1 className="logo">TripHopper</h1>
-          </a>
+          <Link to={`/trips/`}>
+            <a href="#" className="logo flex">
+              <img src={logo} className="resize" alt="" />
+              <h1 className="logo">TripHopper</h1>
+            </a>
+          </Link>
         </div>
 
         <div className={active}>
@@ -47,15 +59,24 @@ const Navbar = () => {
                 Contact
               </a>
             </li>
-            <li className="navWelcome">
-              Welcome, <span>Guest</span>
-            </li>
-            <button className="btn">
-              <a href="/auth">LOGIN</a>
-            </button>
-            <button className="btn">
-              <a href="/auth">SIGN UP</a>
-            </button>
+            
+            {user ? (
+              <div>
+                <span>Hey, {user.username}! </span>
+                <button className="logout" onClick={handleClick}>
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <div>
+                <button className="btn">
+                  <a href="/auth">LOGIN</a>
+                </button>
+                <button className="btn">
+                  <a href="/auth">SIGN UP</a>
+                </button>
+              </div>
+            )}
           </ul>
 
           <div onClick={hideNav} className="closeNavbar">

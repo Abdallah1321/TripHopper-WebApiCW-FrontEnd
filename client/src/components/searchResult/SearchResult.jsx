@@ -3,7 +3,7 @@ import "./searchResult.css";
 
 import { GrLocation } from "react-icons/gr";
 import { AiOutlineArrowRight } from "react-icons/ai";
-import { useNavigate , useLocation} from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 
 import useFetch from "../../hooks/useFetch";
 import { BASE_URL } from "../../utils/config";
@@ -11,23 +11,25 @@ import { BASE_URL } from "../../utils/config";
 import Aos from "aos";
 import "aos/dist/aos.css";
 
-
 const Trip = () => {
+  const [pageCount, setPageCount] = useState(0);
+  const [page, setPage] = useState(0);
+
   const location = useLocation();
 
-  const [data] = useState(location.state)
+  const { data: tripCount } = useFetch(`${BASE_URL}/trips/search/getTripCount`);
 
-  console.log(data)
+  const [data] = useState(location.state);
 
+  console.log(data);
   useEffect(() => {
     Aos.init({ duration: 2000 });
-  }, []);
+    const pages = Math.ceil(tripCount / 9);
+    setPageCount(pages);
+    window.scrollTo(0,700)
+  }, [page, tripCount]);
 
   const navigate = useNavigate();
-
-  const handleSearch = () => {
-    navigate("/trips/1");
-  };
 
   return (
     <section className="main container section">
@@ -37,9 +39,10 @@ const Trip = () => {
         </h3>
       </div>
 
-      
-        <div className="secContent grid">
-        { data.length === 0 ? <h4>No Trips Found</h4> :
+      <div className="secContent grid">
+        {data.length === 0 ? (
+          <h4>No Trips Found</h4>
+        ) : (
           data?.map(
             ({
               _id,
@@ -75,14 +78,28 @@ const Trip = () => {
                       <p>{description}</p>
                     </div>
 
-                    <button onClick={handleSearch} className="btn flex">
+                    <Link to={`/trips/${_id}`}>
+                    <button className="btn flex">
                       LEARN MORE <AiOutlineArrowRight className="icon" />
                     </button>
+                    </Link>
                   </div>
                 </div>
               );
             }
-          )}
+          )
+        )}
+      </div>
+      <div className="pagination">
+        {[...Array(pageCount).keys()].map((number) => (
+          <span
+            key={number}
+            onClick={() => setPage(number)}
+            className={page === number ? "active_page" : ""}
+          >
+            {number + 1}
+          </span>
+        ))}
       </div>
     </section>
   );
