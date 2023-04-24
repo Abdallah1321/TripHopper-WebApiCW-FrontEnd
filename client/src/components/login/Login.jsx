@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import "./login.css";
 import { useLogin } from "../../hooks/useLogin";
 import { useState } from "react";
+import img from "../../assets/images/google.png";
+import { BASE_URL } from "../../utils/config";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -12,6 +14,10 @@ const Login = () => {
     e.preventDefault();
 
     await login(username, password);
+  };
+
+  const googleAuth = () => {
+    window.open(`${BASE_URL}/auth/google/callback`, "_self");
   };
 
   return (
@@ -35,6 +41,10 @@ const Login = () => {
         </button>
         {error && <div className="error">{error}</div>}
       </form>
+      <p>or</p>
+      <button className="googleBtn" onClick={googleAuth}>
+        <span>Login with Google</span>
+      </button>
     </div>
   );
 };
