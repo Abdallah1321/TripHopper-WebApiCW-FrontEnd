@@ -121,6 +121,16 @@
           }
         }
 
+        .dateText {
+          color: var(--textColor);
+        }
+
+        .date {
+          position: absolute;
+          top: 100px;
+          left: 220px;
+        }
+
         .icon {
           font-size: 18px;
           color: var(--PrimaryColor) !important;

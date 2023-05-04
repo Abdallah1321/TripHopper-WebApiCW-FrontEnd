@@ -3,13 +3,13 @@ import "./home.css";
 import video from "../../assets/videos/plane.mp4";
 import img from "../../assets/images/header.avif";
 import { MdOutlineLocationOn } from "react-icons/md";
-import { FaFilter } from "react-icons/fa";
 import { BsFacebook, BsInstagram, BsTwitter } from "react-icons/bs";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useState } from "react";
-import { DateRangePicker } from "react-dates";
-import "react-dates/initialize";
-import "react-dates/lib/css/_datepicker.css";
+import { DateRange } from "react-date-range";
+import {format} from 'date-fns'
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
 import Aos from "aos";
 import "aos/dist/aos.css";
 import { BASE_URL } from "../../utils/config";
@@ -20,14 +20,16 @@ const Home = () => {
     Aos.init({ duration: 2000 });
   }, []);
 
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const [openDate, setOpenDate] = useState(false)
+  const [date, setDate] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ]);
   const [focusedInput, setFocusedInput] = useState(null);
 
-  const handleDatesChange = ({ startDate, endDate }) => {
-    setStartDate(startDate);
-    setEndDate(endDate);
-  };
 
   const handleFocusChange = (focusedInput) => {
     setFocusedInput(focusedInput);
@@ -72,7 +74,11 @@ const Home = () => {
           <div className="inputDest">
             <label htmlFor="city">Where do you want to go?</label>
             <div className="input flex">
-              <input type="text" placeholder="Enter destination..." ref={locationRef}/>
+              <input
+                type="text"
+                placeholder="Enter destination..."
+                ref={locationRef}
+              />
               <MdOutlineLocationOn className="icon" />
             </div>
           </div>
@@ -80,29 +86,14 @@ const Home = () => {
           <div className="inputDate">
             <label htmlFor="date">When do you want to go?</label>
             <div className="input flex">
-              <DateRangePicker
-                startDate={startDate}
-                startDateId="start_date_id"
-                endDate={endDate}
-                endDateId="end_date_id"
-                onDatesChange={handleDatesChange}
-                focusedInput={focusedInput}
-                onFocusChange={handleFocusChange}
-                displayFormat="MMM D, YYYY"
-                numberOfMonths={2}
-                hideKeyboardShortcutsPanel={true}
-                customArrowIcon="->"
-                anchorDirection="right"
-                showClearDates={true}
-                showDefaultInputIcon={true}
-                inputIconPosition="after"
-                small={true}
-                block={false}
-                withFullScreenPortal={false}
-                verticalSpacing={10}
-                noBorder={true}
-                keepOpenOnDateSelect={false}
-              />
+              <span onClick={()=>setOpenDate(!openDate)} className="dateText" >{`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(date[0].endDate, "MM/dd/yyyy")}`}</span>
+              {openDate && <DateRange
+                editableDateInputs={true}
+                onChange={(item) => setDate([item.selection])}
+                moveRangeOnFirstSelection={false}
+                ranges={date}
+                className="date"
+              />}
             </div>
           </div>
 
@@ -112,7 +103,13 @@ const Home = () => {
               <h3 className="total"></h3>
             </div>
             <div className="input flex">
-              <input type="number" max="100000" min="1000" placeholder="1000" ref={budgetRef} />
+              <input
+                type="number"
+                max="100000"
+                min="1000"
+                placeholder="1000"
+                ref={budgetRef}
+              />
             </div>
           </div>
 

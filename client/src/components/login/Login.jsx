@@ -4,6 +4,7 @@ import { useLogin } from "../../hooks/useLogin";
 import { useState } from "react";
 import img from "../../assets/images/google.png";
 import { BASE_URL } from "../../utils/config";
+import GoogleLoginButton from "react-google-button";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -17,7 +18,7 @@ const Login = () => {
   };
 
   const googleAuth = () => {
-    window.open(`${BASE_URL}/auth/google/callback`, "_self");
+    window.open(`http://localhost:4000/google/callback`, "_self");
   };
 
   return (
@@ -42,9 +43,10 @@ const Login = () => {
         {error && <div className="error">{error}</div>}
       </form>
       <p>or</p>
-      <button className="googleBtn" onClick={googleAuth}>
-        <span>Login with Google</span>
-      </button>
+      <GoogleLoginButton
+        onClick={googleAuth}
+        buttonText="Login with Google"
+      />
     </div>
   );
 };

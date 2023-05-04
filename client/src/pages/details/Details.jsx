@@ -5,17 +5,72 @@ import { BsFillBookmarkFill } from "react-icons/bs";
 import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import { BASE_URL } from "../../utils/config";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 const Details = () => {
   const { id } = useParams();
+  const [weather, setWeather] = useState("");
+  const [food, setFood] = useState("");
+  const [exchange, setExchange] = useState("");
 
   console.log(id);
 
   const { data, loading, error } = useFetch(`${BASE_URL}/trips/${id}`);
-  console.log(data);
+
+  const GetWeather = () => {
+    useEffect(() => {
+      axios({
+        method: "GET",
+        url: `${BASE_URL}/trips/${id}/getWeather`,
+      })
+        .then((response) => {
+          console.log(response.data);
+          setWeather(response.data.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }, []);
+  };
+
+  const GetFood = () => {
+    useEffect(() => {
+      axios({
+        method: "GET",
+        url: `${BASE_URL}/trips/${id}/getFood`,
+      })
+        .then((response) => {
+          console.log(response.data);
+          setFood(response.data.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }, []);
+  };
+
+  const GetExchange = () => {
+    useEffect(() => {
+      axios({
+        method: "GET",
+        url: `${BASE_URL}/trips/${id}/getExchange`,
+      })
+        .then((response) => {
+          console.log(response.data);
+          setExchange(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }, []);
+  };
 
   return (
     <div>
+      <GetWeather />
+      <GetFood />
+      <GetExchange/>
       <Navbar />
       <section className="main container section">
         <div className="secTitle">
@@ -48,10 +103,11 @@ const Details = () => {
                 <h4>Details</h4>
                 <p>{data.description}</p>
                 <h4>Famous Food for Country</h4>
-                <p>TO BE ADDED</p>
-                <h4>Weather</h4>
-                <p>TO BE ADDED</p>
-                <p>1 {data.exCode} = EGP</p>
+                <p>{food}</p>
+                <h4>Avg weather for the next 14 days</h4>
+                <p>{weather} &deg;C</p>
+                <h4>Exchange Rate</h4>
+                <p>1 {data.exCode} = {exchange} EGP</p>
               </div>
 
               <button className="btn flex">

@@ -116,6 +116,14 @@
 .home .content .cardDiv .input input::placeholder {
   font-size: 13px;
 }
+.home .content .cardDiv .input .dateText {
+  color: var(--textColor);
+}
+.home .content .cardDiv .input .date {
+  position: absolute;
+  top: 100px;
+  left: 220px;
+}
 .home .content .cardDiv .input .icon {
   font-size: 18px;
   color: var(--PrimaryColor) !important;
