@@ -12,24 +12,14 @@ import Aos from "aos";
 import "aos/dist/aos.css";
 
 const Trip = () => {
-  const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
 
-  const { data, loading, error } = useFetch(`${BASE_URL}/trips?page=${page}`);
-  const { data: tripCount } = useFetch(`${BASE_URL}/trips/search/getTripCount`);
+  const { data, loading, error } = useFetch(`${BASE_URL}/trips`);
 
   useEffect(() => {
     Aos.init({ duration: 2000 });
-    const pages = Math.ceil(tripCount / 9);
-    setPageCount(pages);
     window.scrollTo(0, 700);
-  }, [page, tripCount]);
-
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate("/trips/1");
-  };
+  }, []);
 
   return (
     <section className="main container section">
@@ -89,17 +79,7 @@ const Trip = () => {
             }
           )}
       </div>
-      <div className="pagination">
-        {[...Array(pageCount).keys()].map((number) => (
-          <span
-            key={number}
-            onClick={() => setPage(number)}
-            className={page === number ? "active_page" : ""}
-          >
-            {number + 1}
-          </span>
-        ))}
-      </div>
+
     </section>
   );
 };

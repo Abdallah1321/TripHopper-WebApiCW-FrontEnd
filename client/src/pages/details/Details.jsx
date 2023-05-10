@@ -6,7 +6,9 @@ import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import { BASE_URL } from "../../utils/config";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { SearchContext } from "../../context/SearchContext";
+import { getTime } from "date-fns";
 
 const Details = () => {
   const { id } = useParams();
@@ -18,6 +20,19 @@ const Details = () => {
 
   const { data, loading, error } = useFetch(`${BASE_URL}/trips/${id}`);
 
+  const { date } = useContext(SearchContext);
+
+  const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
+  function dayDifference(date1, date2) {
+    date1 = new Date(date1);
+    date2 = new Date(date2);
+    const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+    const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
+    return diffDays;
+  }
+
+  const days = dayDifference(date[0].endDate, date[0].startDate);
+
   const GetWeather = () => {
     useEffect(() => {
       axios({
@@ -25,7 +40,6 @@ const Details = () => {
         url: `${BASE_URL}/trips/${id}/getWeather`,
       })
         .then((response) => {
-          console.log(response.data);
           setWeather(response.data.data);
         })
         .catch((error) => {
@@ -41,7 +55,6 @@ const Details = () => {
         url: `${BASE_URL}/trips/${id}/getFood`,
       })
         .then((response) => {
-          console.log(response.data);
           setFood(response.data.data);
         })
         .catch((error) => {
@@ -57,7 +70,6 @@ const Details = () => {
         url: `${BASE_URL}/trips/${id}/getExchange`,
       })
         .then((response) => {
-          console.log(response.data);
           setExchange(response.data);
         })
         .catch((error) => {
@@ -70,7 +82,7 @@ const Details = () => {
     <div>
       <GetWeather />
       <GetFood />
-      <GetExchange/>
+      <GetExchange />
       <Navbar />
       <section className="main container section">
         <div className="secTitle">
@@ -92,7 +104,18 @@ const Details = () => {
               <div className="fees flex">
                 <div className="price">
                   <h4>Budget</h4>
-                  <h5>{data.budget} LE /day</h5>
+                  <h5>
+                    {data.budget * days} LE ({days} nights){" "}
+                  </h5>
+                  <h4>Two-Way flight</h4>
+                  <h5>{data.flights} LE /<small>per person</small></h5>
+                  <h3>Average Daily Prices</h3>
+                  <h4>Accomodation</h4>
+                  <h5>{data.accomodation} LE</h5>
+                  <h4>Transport</h4>
+                  <h5>{data.transport} LE</h5>
+                  <h4>Meals</h4>
+                  <h5>{data.flights} LE</h5>
                 </div>
                 <div className="price">
                   <h4>Nationality</h4>
@@ -107,7 +130,9 @@ const Details = () => {
                 <h4>Avg weather for the next 14 days</h4>
                 <p>{weather} &deg;C</p>
                 <h4>Exchange Rate</h4>
-                <p>1 {data.exCode} = {exchange} EGP</p>
+                <p>
+                  1 {data.exCode} = {exchange} EGP
+                </p>
               </div>
 
               <button className="btn flex">
