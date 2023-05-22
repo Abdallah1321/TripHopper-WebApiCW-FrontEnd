@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { BASE_URL, CLIENTID, SECRETKEY } from "../utils/config";
 
-const secret = "thisissecretkey"
 
 const useFetch = url => {
   const [data, setData] = useState([]);
