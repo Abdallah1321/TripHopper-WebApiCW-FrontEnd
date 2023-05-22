@@ -11,7 +11,7 @@ import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import Aos from "aos";
 import "aos/dist/aos.css";
-import { BASE_URL } from "../../utils/config";
+import { BASE_URL, CLIENTID, SECRETKEY } from "../../utils/config";
 import { useNavigate } from "react-router-dom";
 import { SearchContext } from "../../context/SearchContext";
 
@@ -21,6 +21,7 @@ const Home = () => {
   }, []);
 
   const [openDate, setOpenDate] = useState(false);
+  const [oauthKey, setOauthKey] = useState(null);
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -38,36 +39,61 @@ const Home = () => {
 
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
   function dayDifference(date1, date2) {
-    date1 = new Date(date1)
-    date2 = new Date(date2)
+    date1 = new Date(date1);
+    date2 = new Date(date2);
     const timeDiff = Math.abs(date2.getTime() - date1.getTime());
     const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
     return diffDays;
   }
 
-
   const handleSearch = async () => {
-    
-    const days = dayDifference(date[0].endDate, date[0].startDate)
-
-    console.log(date)
-    const location = locationRef.current.value;
-    const budget = budgetRef.current.value / days;
-    console.log(budget)
-    dispatch({ type: "NEW_SEARCH", payload: { location, date, budget } });
-
-    const res = await fetch(
-      `${BASE_URL}/trips/search/getTripBySearch?location=${location}&budget=${budget}`
-    );
-
-    if (!res.ok) alert("Something went wrong");
-
-    const result = await res.json();
-
-    navigate(`/trips/search?location=${location}&budget=${budget}`, {
-      state: result.data,
-    });
+    try {
+      const response = await fetch(`${BASE_URL}/oauth/key`, {
+        headers: {
+          clientId: CLIENTID,
+          secret: SECRETKEY,
+        },
+      });
+  
+      const result = await response.json();
+      setOauthKey(result.key);
+    } catch (err) {
+      return err.message;
+    }
   };
+  
+  useEffect(() => {
+    if (oauthKey) {
+      const search = async () => {
+        const days = dayDifference(date[0].endDate, date[0].startDate);
+          
+        console.log(date);
+        const location = locationRef.current.value;
+        const budget = budgetRef.current.value / days;
+        console.log(budget);
+        dispatch({ type: "NEW_SEARCH", payload: { location, date, budget } });
+  
+        const res = await fetch(
+          `${BASE_URL}/trips/search/getTripBySearch?location=${location}&budget=${budget}`,
+          {
+            headers: {
+              key: oauthKey,
+            },
+          }
+        );
+  
+        if (!res.ok) alert("Something went wrong");
+  
+        const result = await res.json();
+  
+        navigate(`/trips/search?location=${location}&budget=${budget}`, {
+          state: result.data,
+        });
+      };
+  
+      search();
+    }
+  }, [oauthKey, date, dispatch, navigate]);
 
   return (
     <section className="home">

@@ -1,30 +1,64 @@
 import { useState, useEffect } from "react";
+import { BASE_URL, CLIENTID, SECRETKEY } from "../utils/config";
+
+const secret = "thisissecretkey"
 
 const useFetch = url => {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [oauthKey, setOauthKey] = useState(null);
+
 
   useEffect(() => {
+    const fetchOauthKey = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/oauth/key`, {
+          headers: {
+            clientId: CLIENTID,
+            secret: SECRETKEY,
+          },
+        });
+
+        const result = await response.json();
+        setOauthKey(result.key);
+      } catch (err) {
+        setError(err.message);
+      }
+    };
+    fetchOauthKey();
+  }, [CLIENTID, SECRETKEY]);
+
+    useEffect(() => {
     const fetchData = async () => {
+      if (!oauthKey) {
+        return;
+      }
+
       setLoading(true);
 
       try {
-        const res = await fetch(url);
+        const response = await fetch(url, {
+          headers: {
+            key: oauthKey,
+          },
+        });
 
-        if (!res.ok) {
-          setError("failed to fetch");
+        if (!response.ok) {
+          setError("Failed to fetch");
         }
-        const result = await res.json();
+
+        const result = await response.json();
         setData(result.data);
-        setLoading(false)
+        setLoading(false);
       } catch (err) {
         setError(err.message);
         setLoading(false);
       }
     };
+
     fetchData();
-  }, [url]);
+  }, [url, oauthKey]);
 
   return {
     data,

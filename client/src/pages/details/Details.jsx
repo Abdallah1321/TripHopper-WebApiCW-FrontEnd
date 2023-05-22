@@ -4,7 +4,7 @@ import { GrLocation } from "react-icons/gr";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
-import { BASE_URL } from "../../utils/config";
+import { BASE_URL, CLIENTID, SECRETKEY} from "../../utils/config";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { SearchContext } from "../../context/SearchContext";
@@ -15,6 +15,8 @@ const Details = () => {
   const [weather, setWeather] = useState("");
   const [food, setFood] = useState("");
   const [exchange, setExchange] = useState("");
+  const [oauthKey, setOauthKey] = useState(null);
+
 
   console.log(id);
 
@@ -33,11 +35,35 @@ const Details = () => {
 
   const days = dayDifference(date[0].endDate, date[0].startDate);
 
+  useEffect(() => {
+    const fetchOauthKey = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/oauth/key`, {
+          headers: {
+            clientId: CLIENTID,
+            secret: SECRETKEY,
+          },
+        });
+
+        const result = await response.json();
+        setOauthKey(result.key);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchOauthKey();
+  }, []);
+
   const GetWeather = () => {
+
     useEffect(() => {
       axios({
         method: "GET",
         url: `${BASE_URL}/trips/${id}/getWeather`,
+        headers: {
+          key: oauthKey,
+        },
       })
         .then((response) => {
           setWeather(response.data.data);
@@ -53,6 +79,9 @@ const Details = () => {
       axios({
         method: "GET",
         url: `${BASE_URL}/trips/${id}/getFood`,
+        headers: {
+          key: oauthKey,
+        },
       })
         .then((response) => {
           setFood(response.data.data);
@@ -68,6 +97,9 @@ const Details = () => {
       axios({
         method: "GET",
         url: `${BASE_URL}/trips/${id}/getExchange`,
+        headers: {
+          key: oauthKey,
+        },
       })
         .then((response) => {
           setExchange(response.data);
