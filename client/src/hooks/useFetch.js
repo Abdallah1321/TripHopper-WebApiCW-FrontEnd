@@ -12,6 +12,7 @@ const useFetch = url => {
   useEffect(() => {
     const fetchOauthKey = async () => {
       try {
+        // check oauth key with responsebefore sending request
         const response = await fetch(`${BASE_URL}/oauth/key`, {
           headers: {
             clientId: CLIENTID,

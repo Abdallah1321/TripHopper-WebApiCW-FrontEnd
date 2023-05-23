@@ -37,6 +37,8 @@ const Home = () => {
 
   const navigate = useNavigate();
 
+
+  // convert dates to get the number of days to send it in search to calculate the budget per day
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
   function dayDifference(date1, date2) {
     date1 = new Date(date1);
@@ -48,6 +50,7 @@ const Home = () => {
 
   const handleSearch = async () => {
     try {
+      // send clientid and secret to get the 
       const response = await fetch(`${BASE_URL}/oauth/key`, {
         headers: {
           clientId: CLIENTID,
@@ -56,6 +59,7 @@ const Home = () => {
       });
   
       const result = await response.json();
+      //set key response to oauth key
       setOauthKey(result.key);
     } catch (err) {
       return err.message;
